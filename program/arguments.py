@@ -1,9 +1,14 @@
 class arguments:
     def __init__(self, args):
         self.args = args
+
         self.source_directories = []
         self.source_files = []
         self.output_directories = []
+
+        self.config_name = ""
+        self.save_config = False
+
         self.get_args()
         return
 
@@ -30,9 +35,12 @@ class arguments:
 
             # Stored transfer
             elif arg == "-c" or arg == "--config":
-                return
+                if index + 1 >= arg_count: return
+                self.config_name = self.args[index + 1]
+                index = index + 2
             elif arg == "-s" or arg == "--save":
-                return
+                self.save_config = True
+                index = index + 1
 
             # Default
             else:
