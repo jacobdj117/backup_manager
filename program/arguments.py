@@ -7,7 +7,6 @@ class arguments:
         self.output_directories = []
 
         self.config_name = ""
-        self.save_config = False
 
         self.get_args()
         return
@@ -18,8 +17,6 @@ class arguments:
 
         while index < arg_count:
             arg = self.args[index]
-
-            # Manal transfer
             if arg == "-f" or arg == "--file":
                 if index + 1 >= arg_count: return
                 self.source_files.append(self.args[index + 1])
@@ -32,16 +29,9 @@ class arguments:
                 if index + 1 >= arg_count: return
                 self.output_directories.append(self.args[index + 1])
                 index = index + 2
-
-            # Stored transfer
             elif arg == "-c" or arg == "--config":
                 if index + 1 >= arg_count: return
                 self.config_name = self.args[index + 1]
                 index = index + 2
-            elif arg == "-s" or arg == "--save":
-                self.save_config = True
-                index = index + 1
-
-            # Default
             else:
                 index = index + 1

@@ -22,8 +22,11 @@ class file_manager:
             for destination in self.output_directories:
                 shutil.copytree(directory, destination)
 
-    def create_config(self):
+    def initialize_config(self, config_name):
+        return
+
+    def create_config(self, config_name):
         return
     
-    def load_config(self):
+    def load_config(self, config_name):
         return
