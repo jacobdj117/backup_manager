@@ -1,7 +1,8 @@
+import json
 import shutil
 
 class file_manager:
-    _CONFIG_FILE_ = "configs.csv"
+    _CONFIG_FILE_ = "configs.json"
 
     def __init__(self, source_files, sourcce_directories, ourput_directories):
         self.source_files = source_files
@@ -29,7 +30,7 @@ class file_manager:
         self.config_file.seek(0)
 
         if not self.read_config(config_name):
-            self.create_config(config_name)
+            self.write_config(config_name)
 
         self.config_file.close()
 
@@ -38,6 +39,12 @@ class file_manager:
             print(line)
         return False
     
-    def create_config(self, config_name):
-        self.config_file.write(config_name + "\n")
+    def write_config(self, config_name):
+        new_config = {
+            "name": config_name,
+            "source_files": self.source_files,
+            "source_directories": self.source_directories,
+            "output_directories": self.output_directories
+        }
+        json.dump(new_config, self.config_file, indent=4)
         return
