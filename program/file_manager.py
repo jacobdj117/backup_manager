@@ -10,12 +10,6 @@ class file_manager:
         self.output_directories = ourput_directories
         return
     
-    def __init__(self):
-        self.source_files = []
-        self.source_directories = []
-        self.output_directories = []
-        return
-    
     def perform_copies(self):
         for file in self.source_files:
             for destination in self.output_directories:
