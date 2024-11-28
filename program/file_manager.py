@@ -1,4 +1,5 @@
 import json
+import os
 import shutil
 
 class file_manager:
@@ -23,22 +24,33 @@ class file_manager:
         self.config_file = open(self._CONFIG_FILE_, "a+")
         self.config_file.seek(0)
 
-        if not self.read_config(config_name):
-            self.write_config(config_name)
+        if os.stat(self._CONFIG_FILE_).st_size > 0:
+            print("size > 0")
+            configs = json.load(self.config_file)
+
+            # if not found
+            self.write_config(config_name, configs)
+        else:
+            print("size = 0")
+            self.write_config(config_name, "")
 
         self.config_file.close()
-
-    def read_config(self, config_name):
-        for line in self.config_file:
-            print(line)
-        return False
-    
-    def write_config(self, config_name):
+        
+    def write_config(self, new_config_name, existing_configs):
         new_config = {
-            "name": config_name,
-            "source_files": self.source_files,
-            "source_directories": self.source_directories,
-            "output_directories": self.output_directories
-        }
-        json.dump(new_config, self.config_file, indent=4)
-        return
+                        new_config_name: {
+                        "source_files": self.source_files,
+                        "source_directories": self.source_directories,
+                        "output_directories": self.output_directories
+                    }
+                }
+
+        if existing_configs == "":
+            print("no existing")
+            json.dump(new_config, self.config_file, indent=4)
+            return
+        print("existing")
+        existing_configs.update(new_config)
+        self.config_file.close()
+        self.config_file = open(self._CONFIG_FILE_, "w")
+        json.dump(existing_configs, self.config_file, indent=4)
