@@ -25,20 +25,30 @@ class file_manager:
         self.config_file.seek(0)
 
         if os.stat(self._CONFIG_FILE_).st_size > 0:
-            print("size > 0")
             configs = json.load(self.config_file)
-            print(configs.test_1)
+            selected_config = configs.get(config_name)
 
-            # if not found
-            if False:
+            if not selected_config:
                 self.write_config(config_name, configs)
+                return
+
+            self.source_files = selected_config["source_files"]
+            self.source_directories = selected_config["source_directories"]
+            self.output_directories = selected_config["output_directories"]
         else:
-            print("size = 0")
             self.write_config(config_name, "")
 
         self.config_file.close()
         
     def write_config(self, new_config_name, existing_configs):
+        if not self.source_directories and not self.source_files:
+            print("ERROR: please specify at least one source file (-f) or source directory (-d)")
+            return
+
+        if not self.output_directories:
+            print("ERROR: please specify at least one output directory (-o)")
+            return
+
         new_config = {
                         new_config_name: {
                         "source_files": self.source_files,
