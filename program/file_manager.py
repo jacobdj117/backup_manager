@@ -58,10 +58,8 @@ class file_manager:
                 }
 
         if existing_configs == "":
-            print("no existing")
             json.dump(new_config, self.config_file, indent=4)
             return
-        print("existing")
         existing_configs.update(new_config)
         self.config_file.close()
         self.config_file = open(self._CONFIG_FILE_, "w")
