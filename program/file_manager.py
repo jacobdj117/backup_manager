@@ -27,9 +27,11 @@ class file_manager:
         if os.stat(self._CONFIG_FILE_).st_size > 0:
             print("size > 0")
             configs = json.load(self.config_file)
+            print(configs.test_1)
 
             # if not found
-            self.write_config(config_name, configs)
+            if False:
+                self.write_config(config_name, configs)
         else:
             print("size = 0")
             self.write_config(config_name, "")
