@@ -29,9 +29,13 @@ class file_manager:
         highest_existing_revision = 0
 
         for file in os.listdir(path):
-            print(file)
-            split_file = file.rsplit("_v", 1)
-            print(split_file)
+            filename = os.path.splitext(file)
+            split_file = filename[0].rsplit("_v", 1)
+            if len(split_file) == 1:
+                return "_v1"
+            highest_existing_revision = split_file[1]
+
+        return "_v" + str(highest_existing_revision)
 
     def initialize_config(self, config_name):
         self.config_file = open(self._CONFIG_FILE_, "a+")
