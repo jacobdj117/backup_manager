@@ -12,12 +12,13 @@ class file_manager:
         return
     
     def perform_copies(self):
-        for file in self.source_files:
-            for destination in self.output_directories:
+        for destination in self.output_directories:
+            # revision_suffix = self.get_revision(destination)
+            # print(revision_suffix)
+            for file in self.source_files:
                 shutil.copy(file, destination)
 
-        for directory in self.source_directories:
-            for destination in self.output_directories:
+            for directory in self.source_directories:
                 normalized_directory = os.path.normpath(directory)
                 directory_name = os.path.basename(normalized_directory)
                 new_directory_name = os.path.join(destination, directory_name)
