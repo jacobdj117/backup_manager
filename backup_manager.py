@@ -13,4 +13,4 @@ file_manager = file_manager(
 if arguments.config_name != "":
     file_manager.initialize_config(arguments.config_name)
 
-#file_manager.perform_copies()
+file_manager.perform_copies()

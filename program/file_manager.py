@@ -18,7 +18,10 @@ class file_manager:
 
         for directory in self.source_directories:
             for destination in self.output_directories:
-                shutil.copytree(directory, destination)
+                normalized_directory = os.path.normpath(directory)
+                directory_name = os.path.basename(normalized_directory)
+                new_directory_name = os.path.join(destination, directory_name)
+                shutil.copytree(directory, new_directory_name)
 
     def initialize_config(self, config_name):
         self.config_file = open(self._CONFIG_FILE_, "a+")
