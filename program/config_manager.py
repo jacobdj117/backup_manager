@@ -56,6 +56,10 @@ class config_manager:
         self.config_file = open(self._CONFIG_FILE_, "w")
         json.dump(existing_configs, self.config_file, indent=4)
 
+    def source_files(self): return self.source_files
+    def source_directories(self): return self.source_directories
+    def output_directories(self): return self.output_directories
+
     def print_config(self, config_name):
         print("Running config ", config_name, ", which has the following parameters:")
         print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
@@ -83,8 +87,4 @@ class config_manager:
         else:
             # TODO - This should be an error case - close the program and tell the user than an output is needed
             print("No Output Directories")
-
-
-    def source_files(self): return self.source_files
-    def source_directories(self): return self.source_directories
-    def output_directories(self): return self.output_directories
+        print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")

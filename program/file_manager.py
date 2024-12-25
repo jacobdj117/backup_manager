@@ -9,6 +9,9 @@ class file_manager:
         return
     
     def perform_copies(self):
+        print("Output contents before copies")
+        self.print_dir_contents()
+
         for destination in self.output_directories:
             revision_suffix = self.get_revision(destination)
 
@@ -20,6 +23,10 @@ class file_manager:
                 directory_name = os.path.basename(normalized_directory) + revision_suffix
                 new_directory_name = os.path.join(destination, directory_name)
                 shutil.copytree(directory, new_directory_name)
+        
+        print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+        print("Output contents After copies")
+        self.print_dir_contents()
 
     def get_revision(self, path):
         highest_existing_revision = 0
@@ -34,3 +41,10 @@ class file_manager:
                 highest_existing_revision = int(split_file[1])
 
         return "_v" + str(highest_existing_revision + 1)
+    
+    def print_dir_contents(self):
+        for dir in self.output_directories:
+            print("Contents of output directory ", dir, ":")
+            for item in os.listdir(dir):
+                print(item)
+            print("- - - - - - - - - - - - - - - - - - - - ")
