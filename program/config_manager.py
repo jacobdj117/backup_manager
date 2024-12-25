@@ -9,6 +9,11 @@ class config_manager:
         self.source_directories = sourcce_directories
         self.output_directories = ourput_directories
 
+    def __init__(self):
+        self.source_files = []
+        self.source_directories = []
+        self.output_directories = []
+
     def initialize_config(self, config_name):
         self.config_file = open(self._CONFIG_FILE_, "a+")
         self.config_file.seek(0)
@@ -59,6 +64,15 @@ class config_manager:
     def source_files(self): return self.source_files
     def source_directories(self): return self.source_directories
     def output_directories(self): return self.output_directories
+
+    def list_configs(self):
+        self.config_file = open(self._CONFIG_FILE_, "r")
+        if os.stat(self._CONFIG_FILE_).st_size <= 0:
+            print("No configs")
+            return
+        configs = json.load(self.config_file)
+        for config in configs:
+            print(config)
 
     def print_config(self, config_name):
         print("Running config ", config_name, ", which has the following parameters:")
