@@ -27,6 +27,7 @@ class config_manager:
         else:
             self.write_config(config_name, "")
 
+        self.print_config(config_name)
         self.config_file.close()
         
     def write_config(self, new_config_name, existing_configs):
@@ -38,6 +39,7 @@ class config_manager:
             print("ERROR: please specify at least one output directory (-o)")
             return
 
+        print("Creating new config: ", new_config_name)
         new_config = {
                         new_config_name: {
                         "source_files": self.source_files,
@@ -57,3 +59,32 @@ class config_manager:
     def source_files(self): return self.source_files
     def source_directories(self): return self.source_directories
     def output_directories(self): return self.output_directories
+
+    def print_config(self, config_name):
+        print("Running config ", config_name, ", which has the following parameters:")
+        print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+
+        if len(self.source_files) > 0:
+            print("Source Files:")
+            for file in self.source_files:
+                print(file)
+        else:
+            print("No source Files")
+        print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+
+        if len(self.source_directories) > 0:
+            print("Source Directories:")
+            for dir in self.source_directories:
+                print(dir)
+        else:
+            print("No Source Directories")
+        print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+
+        if len(self.output_directories) > 0:
+            print("Output Directories:")
+            for output in self.output_directories:
+                print(output)
+        else:
+            # TODO - This should be an error case - close the program and tell the user than an output is needed
+            print("No Output Directories")
+        print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
