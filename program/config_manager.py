@@ -57,7 +57,7 @@ class config_manager:
         json.dump(existing_configs, self.config_file, indent=4)
 
     def print_config(self, config_name):
-        print("Configured to run with the following parameters:")
+        print("Running config ", config_name, ", which has the following parameters:")
         print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 
         if len(self.source_files) > 0:
