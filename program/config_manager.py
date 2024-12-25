@@ -9,6 +9,11 @@ class config_manager:
         self.source_directories = sourcce_directories
         self.output_directories = ourput_directories
 
+    def __init__(self):
+        self.source_files = []
+        self.source_directories = []
+        self.output_directories = []
+
     def initialize_config(self, config_name):
         self.config_file = open(self._CONFIG_FILE_, "a+")
         self.config_file.seek(0)

@@ -6,6 +6,10 @@ from program.file_manager import file_manager
 
 arguments = arguments(sys.argv)
 
+if arguments.list_configs:
+    print("config names go here")
+    exit()
+
 if arguments.config_name != "":
     config_manager = config_manager(
         arguments.source_files,
