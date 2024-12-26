@@ -7,7 +7,7 @@ from program.file_manager import file_manager
 arguments = arguments(sys.argv)
 
 if arguments.list_configs:
-    config_manager = config_manager()
+    config_manager = config_manager([], [], [])
     config_manager.list_configs()
     exit()
 
