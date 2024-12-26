@@ -9,14 +9,15 @@ class file_manager:
         return
     
     def perform_copies(self):
-        print("Output contents before copies")
-        self.print_dir_contents()
-
         for destination in self.output_directories:
-            revision_suffix = self.get_revision(destination)
+            if not os.path.isdir(destination):
+                print("Creating directory:", destination)
+                os.mkdir(destination)
+            else:
+                print("Output contents before copies")
+                self.print_dir_contents_single(destination)
 
-            # for file in self.source_files:
-            #     shutil.copy(file, destination)
+            revision_suffix = self.get_revision(destination)
 
             for directory in self.source_directories:
                 normalized_directory = os.path.normpath(directory)
@@ -26,7 +27,7 @@ class file_manager:
         
         print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
         print("Output contents After copies")
-        self.print_dir_contents()
+        self.print_dir_contents_all()
 
     def get_revision(self, path):
         highest_existing_revision = 0
@@ -42,9 +43,12 @@ class file_manager:
 
         return "_v" + str(highest_existing_revision + 1)
     
-    def print_dir_contents(self):
+    def print_dir_contents_all(self):
         for dir in self.output_directories:
-            print("Contents of output directory ", dir, ":")
-            for item in os.listdir(dir):
-                print(item)
-            print("- - - - - - - - - - - - - - - - - - - - ")
+            self.print_dir_contents_single(dir)
+
+    def print_dir_contents_single(self, dir):
+        print("Contents of output directory ", dir, ":")
+        for item in os.listdir(dir):
+            print(item)
+        print("- - - - - - - - - - - - - - - - - - - - ")
