@@ -11,8 +11,7 @@ class file_manager:
     def perform_copies(self):
         for destination in self.output_directories:
             if not os.path.isdir(destination):
-                print("Creating directory:", destination)
-                os.mkdir(destination)
+                self.make_output_directory(destination)
             else:
                 print("Output contents before copies")
                 self.print_dir_contents_single(destination)
@@ -28,6 +27,17 @@ class file_manager:
         print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
         print("Output contents After copies")
         self.print_dir_contents_all()
+
+    def make_output_directory(self, path):
+        response = input("The specified output directory " + path + " does not exist.  Create? (y/n)")
+        response = response.lower()
+        while(True):
+            if response == "y" or response == "n": break
+            response = input("Unexpected entry.  use 'y' for yes and 'n' for no")
+
+        if response == "n": exit()
+        print("Creating directory:", path)
+        os.mkdir(path)
 
     def get_revision(self, path):
         highest_existing_revision = 0
