@@ -11,7 +11,8 @@ class file_manager:
     def perform_copies(self):
         for destination in self.output_directories:
             if not os.path.isdir(destination):
-                self.make_output_directory(destination)
+                dir_created = self.make_output_directory(destination)
+                if not dir_created: continue
             else:
                 print("Output contents before copies")
                 self.print_dir_contents_single(destination)
@@ -35,9 +36,10 @@ class file_manager:
             if response == "y" or response == "n": break
             response = input("Unexpected entry.  use 'y' for yes and 'n' for no")
 
-        if response == "n": exit()
+        if response == "n": return False
         print("Creating directory:", path)
         os.mkdir(path)
+        return True
 
     def get_revision(self, path):
         highest_existing_revision = 0
@@ -58,6 +60,7 @@ class file_manager:
             self.print_dir_contents_single(dir)
 
     def print_dir_contents_single(self, dir):
+        if not os.path.isdir(dir): return
         print("Contents of output directory ", dir, ":")
         for item in os.listdir(dir):
             print(item)
