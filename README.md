@@ -2,7 +2,8 @@
 
 Backup Manager is a tool used to create redundant and incremental copies of a target directory to a local filesystem.  It's ideal use case is to assist with projects that are too large for for an online backup service, such as git, to be economical.  For example, the use case that inspired the creation of this tool is backing up music projects, which can end up containing hundreds of audio files, Digital Audio Workstation (DAW) (project files), signal chains, MIDI maps, and even video files if a song will be released with an accompanying video.
 
-It is recommended that the system that will run the tool has access to multiple hard drives, either through a physical, local connection, or through a network.  This will allow the redundant copies to be made on diferent physical devices, safequarding against equipment failure.
+
+It is recommended that the system that will run the tool has access to multiple hard drives, either through a physical, local connection, or through a network.  This will allow the redundant copies to be made on different physical devices, safeguarding against equipment failure.
 
 # Usage
 
@@ -45,7 +46,7 @@ Each subsequent use of Backup Manager for the same source and destination direct
 
 ### Configs
 
-Because Backup Manager frequently needs to be used to perform the same operatino multiple times to backup multiple stages of a project, it maintains a config file that can be used to easily rerun an operation multiple times.  This config file is a JSON file located in the directory that Backup Manager is run from (TODO - this should be the directory where Backup Manager is located).  Each config contains a title, a set of source directories, and a set of output directories.
+Because Backup Manager frequently needs to be used to perform the same operation multiple times to backup multiple stages of a project, it maintains a config file that can be used to easily rerun an operation multiple times.  This config file is a JSON file located in the directory that Backup Manager is run from (TODO - this should be the directory where Backup Manager is located).  Each config contains a title, a set of source directories, and a set of output directories.
 
 The first time Backup Manager is run for a particular config, every source and destination directory must be specified along with the config's name.  On all subsequent runs for a particular config, only the config name needs to be specified.
 
@@ -57,10 +58,9 @@ Backup Manager supports the following runtime arguments:
 |---------------|--------------|-------------|
 |       -c      | --config     | The name of a config.  Creates the config if it does not exist, otherwise, runs the config.
 |       -d      | --directory  | A path to a single source directory.  May be specified multiple times per run.
-|       -h      | --help       | Print a help statment then close.
+|       -h      | --help       | Print a help statement then close.
 |       -l      | --list       | List the names of the existing configs.
 |       -o      | --output     | A path to a single output directory.  May be specified multiple times per run.
-
 
 ### Examples
 
